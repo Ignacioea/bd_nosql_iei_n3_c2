@@ -88,6 +88,27 @@ aplicacion.get("/obtenerComunas", async(request, response) => {
     }
 });
 
+aplicacion.get('/obtenerUsuarios', async (request, response) => {
+    try {
+        // Usamos agregaciones para obtener info desde otras colecciones e incorporarlas a nuestra colección
+        const usuarios = await Usuario.aggregate([{
+            $lookup: {
+                from: 'paises', // Colección desde la que queremos traer datos
+                localField: 'nacionalidad', // Campo de la colección con la info a buscar
+                foreignField: 'iso2', // Campo de la colección referenciada que quiero mostrar
+                as: 'gentilicio' // Nuevo nombre del campo con la info
+            }
+        }]);
+
+        // En la RESPONSE (res) formateamos los usuarios como JSON y los enviamos
+        response.json(usuarios);
+    } catch (excepcion) {
+        response.status(500).json({
+            message: 'No ha sido posible obtener los datos. ', excepcion 
+        });
+    }
+});
+
 //agregar usuario
 aplicacion.post("/guardarUsuario", async(request, response) => {
     try{
