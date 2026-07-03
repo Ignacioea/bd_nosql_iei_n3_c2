@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario usuarios</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <h1>Registro de usuarios</h1>
+    <form id="formularRegistro">
+
+        <input type="text" placeholder="Nombre"> <br> <br>
+        <input type="email", placeholder="Correo"> <br> <br>
+        <input type="password", placeholder="Contraseña"> <br> <br>
+        <input type="password", placeholder="Repetir Contraseña"> <br> <br> 
+
+        <select name="genero" id="selectGenero">
+            <option value="">Seleccione género</option>
+            <option value="masc">Masculino</option>
+            <option value="fem">Femenino</option>
+            <option value="otro">Otro</option>
+        </select> <br> <br> 
+
+        <!--Dirección-->
+        <input type="text" placeholder="Calle"> <br> <br>
+        <input type="text" placeholder="Numero"> <br> <br>
+        <input type="text" placeholder="Departamento"> <br> <br>
+        <input type="text" placeholder="Código postal"> <br> <br>
+
+        <select name="comuna" id="selectComuna"></select> <br> <br>
+        <button type="button" onclick="validarFormulario()"> Enviar</button>
+    </form>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/formulario.js"></script>
+</body>
+</html>
