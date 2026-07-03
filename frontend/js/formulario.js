@@ -40,3 +40,49 @@ async function cargarInfoComunas() {
     }
     
 }
+
+function validarFormulario(){
+    let formularioValido = true;
+
+    if (formularioValido){
+        alert("formulario válido, enviando datos...");
+
+        const formulario = $("#formularioRegistro")[0];
+        const dataForm = new FormData(formulario);
+
+        const direccion = {
+            comuna: dataForm.get("comuna"),
+            calle: dataForm.get("calle"),
+            numero: dataForm.get("numero"),
+            departamento: dataForm.get("departamento"),
+            codigoPostal: dataForm.get("codigoPostal")
+        }
+
+        dataForm.set("direccion", JSON.stringify(direccion));
+
+        const datos = Object.fromEntries(dataForm.entries());
+
+        const enviarFormulario = async () => {
+            try{
+                const respuesta = await fetch("http://localhost:3000/guardarUsuario", {
+                    method: "POST",
+                    headers:{
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(datos)
+                });
+                const data = await respuesta.json();
+                console.log(data);
+
+                if(respuesta.ok){
+                    window.location.href = "./listado.html";
+                }
+            }catch(error){
+                console.log("Error al ingresar el usuario: ", error);
+            }
+        }
+        enviarFormulario();
+    }else{
+        alert("se produjo un error")
+    }
+};

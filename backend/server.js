@@ -21,6 +21,8 @@ aplicacion.listen(PORT, ()=> {
     console.log("Servidor corriendo en el puerto: ", PORT);
 });
 
+//MODELOS
+//Modelo pais
 const pais = new mongoose.Schema({
     nombre: String,
     iso2: String,
@@ -30,6 +32,38 @@ const pais = new mongoose.Schema({
 });
 
 const Pais = mongoose.model("Pais", pais, "paises")
+
+//Modelo comuna
+const comuna = new mongoose.Schema({
+    codigo: String,
+    nombre: String,
+    region: String
+});
+
+const Comuna = mongoose.model("Comuna", comuna, "comunas")
+
+//Modelo dirección
+const direccion = new mongoose.Schema({
+    comuna: String,
+    calle: String,
+    numero: String,
+    departamento: String,
+    codigo_postal: String
+})
+
+//Modelo usuario
+const usuario = new mongoose.Schema({
+    nombre: String,
+    correo: String,
+    contrasena: String,
+    genero: String,
+    fechaNacimiento: String,
+    Nacionalidad: String,
+    direccion: [direccion]
+})
+
+const Usuario = mongoose.model("Usuario", usuario, "usuarios")
+//MÉTODOS
 
 aplicacion.get("/obtenerPaises", async(request, response) => {
     try{
@@ -42,13 +76,6 @@ aplicacion.get("/obtenerPaises", async(request, response) => {
     }
 });
 
-const comuna = new mongoose.Schema({
-    codigo: String,
-    nombre: String,
-    region: String
-});
-
-const Comuna = mongoose.model("Comuna", comuna, "comunas")
 
 aplicacion.get("/obtenerComunas", async(request, response) => {
     try{
@@ -59,4 +86,48 @@ aplicacion.get("/obtenerComunas", async(request, response) => {
             message: "no fue posible obtener las comunas"
         });
     }
+});
+
+//agregar usuario
+aplicacion.post("/guardarUsuario", async(request, response) => {
+    try{
+        
+        const{
+            nombre,
+            correo,
+            contrasena,
+            genero,
+            fechaNacimiento,
+            nacionalidad,
+            direccion
+        } = request.body;
+        console.log(request.body);
+        const salt = bcrypt.genSaltSync(10);
+        const contrasenaHash =bcrypt.hashSync(contrasena, salt);
+        const objetoDireccion = JSON.parse(direccion);
+
+        const nuevoUsuario = new Usuario({
+            nombre,
+            correo,
+            contrasena: contrasenaHash,
+            genero,
+            fechaNacimiento,
+            nacionalidad,
+            direccion: objetoDireccion
+        });
+
+        await nuevoUsuario.save()
+        response.status(200).json({
+            message: "Usuario creado correctamente"
+        });
+
+
+    }catch(exception){
+    console.log("ERROR:", exception);
+
+    response.status(500).json({
+        message: "No ha sido posible guardar los datos",
+        error: exception.message
+    });
+}
 });
