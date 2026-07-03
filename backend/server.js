@@ -20,3 +20,43 @@ mongoose.connect('mongodb://localhost:27017/IEI_N3_C2')
 aplicacion.listen(PORT, ()=> {
     console.log("Servidor corriendo en el puerto: ", PORT);
 });
+
+const pais = new mongoose.Schema({
+    nombre: String,
+    iso2: String,
+    iso3: String,
+    codigoPais: String,
+    nacionalidad: String
+});
+
+const Pais = mongoose.model("Pais", pais, "paises")
+
+aplicacion.get("/obtenerPaises", async(request, response) => {
+    try{
+        const paises = await Pais.find();
+        response.json(paises)
+    }catch(error){
+        response.status(500).json({
+            message: "no fue posible obtener los paises"
+        });
+    }
+});
+
+const comuna = new mongoose.Schema({
+    codigo: String,
+    nombre: String,
+    region: String
+});
+
+const Comuna = mongoose.model("Comuna", comuna, "comunas")
+
+aplicacion.get("/obtenerComunas", async(request, response) => {
+    try{
+        const comunas = await Comuna.find();
+        response.json(comunas)
+    }catch(error){
+        response.status(500).json({
+            message: "no fue posible obtener las comunas"
+        });
+    }
+});
