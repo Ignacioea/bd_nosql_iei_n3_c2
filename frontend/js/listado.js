@@ -5,7 +5,7 @@ window.onload = function () {
 async function obtenerUsuarios(){
     try{
         const respuesta = await fetch('http://localhost:3000/obtenerUsuarios');
-        const usuarios = await respuesta.json
+        const usuarios = await respuesta.json();
 
         new DataTable("#tablaUsuarios", {
             data: usuarios,
@@ -19,17 +19,24 @@ async function obtenerUsuarios(){
                         switch (data){
                             case "masc":
                                 respuesta = "Masculino";
+                                break;
                             case "fem":
                                 respuesta = "Femenino";
+                                break;
                             case "otro":
                                 respuesta = "Otro";
-                                break
+                                break;
                         }
                         return respuesta;
                     }
                 },
                 {data: "fechaNacimiento"},
-                {data: "gentilicio[0].nombre"}
+                {
+                    data: "gentilicio",
+                    render: function(data){
+                        return data && data.length > 0 ? data[0].nombre: "";
+                    }
+                }
             ]
         });
     }catch (error){

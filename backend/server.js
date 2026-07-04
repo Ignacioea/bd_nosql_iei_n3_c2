@@ -93,10 +93,10 @@ aplicacion.get('/obtenerUsuarios', async (request, response) => {
         // Usamos agregaciones para obtener info desde otras colecciones e incorporarlas a nuestra colección
         const usuarios = await Usuario.aggregate([{
             $lookup: {
-                from: 'paises', // Colección desde la que queremos traer datos
-                localField: 'nacionalidad', // Campo de la colección con la info a buscar
-                foreignField: 'iso2', // Campo de la colección referenciada que quiero mostrar
-                as: 'gentilicio' // Nuevo nombre del campo con la info
+                from: "paises", // Colección desde la que queremos traer datos
+                localField: "nacionalidad", // Campo de la colección con la info a buscar
+                foreignField: "iso2", // Campo de la colección referenciada que quiero mostrar
+                as: "gentilicio" // Nuevo nombre del campo con la info
             }
         }]);
 
