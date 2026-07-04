@@ -3,6 +3,8 @@ $(document).ready(function(){
     cargarInfoComunas();
 });
 
+
+
 async function cargarInfoPaises() {
     try{
         const respuesta = await fetch('http://localhost:3000/obtenerPaises')
@@ -43,7 +45,7 @@ async function cargarInfoComunas() {
 
 function validarFormulario(){
     let formularioValido = true;
-
+    
     if (formularioValido){
         alert("formulario válido, enviando datos...");
 
@@ -55,7 +57,7 @@ function validarFormulario(){
             calle: dataForm.get("calle"),
             numero: dataForm.get("numero"),
             departamento: dataForm.get("departamento"),
-            codigoPostal: dataForm.get("codigoPostal")
+            codigo_postal: dataForm.get("codigo_postal")
         }
 
         dataForm.set("direccion", JSON.stringify(direccion));

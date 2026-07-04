@@ -58,8 +58,8 @@ const usuario = new mongoose.Schema({
     contrasena: String,
     genero: String,
     fechaNacimiento: String,
-    Nacionalidad: String,
-    direccion: [direccion]
+    nacionalidad: String,
+    direccion:[direccion]
 })
 
 const Usuario = mongoose.model("Usuario", usuario, "usuarios")
@@ -122,7 +122,6 @@ aplicacion.post("/guardarUsuario", async(request, response) => {
             nacionalidad,
             direccion
         } = request.body;
-        console.log(request.body);
         const salt = bcrypt.genSaltSync(10);
         const contrasenaHash =bcrypt.hashSync(contrasena, salt);
         const objetoDireccion = JSON.parse(direccion);
