@@ -10,27 +10,28 @@
     <form id="formularioRegistro">
 
         <input type="text" placeholder="Nombre" name="nombre"> <br> <br>
+        <input type="text" placeholder="Rut (sin puntos ni guión)" name="rut">  <br> <br>
         <input type="email", placeholder="Correo" name="correo"> <br> <br>
-        <input type="password", placeholder="Contraseña" name="contrasena"> <br> <br>
-        <input type="password", placeholder="Repetir Contraseña"> <br> <br> 
-
+        <input type="text" placeholder="Teléfono" name="teléfono">  <br> <br>
+        <p>Fecha de nacimiento</p>
+        <input type="date" name="fechaNacimiento" id="inputNacimiento"> <br> <br>
+        <p>Ingrese la nacionalidad</p>
+        <select name="nacionalidad" id="selectNacionalidad"></select> <br> <br> 
+        
         <select name="genero" id="selectGenero">
             <option value="">Seleccione género</option>
             <option value="masc">Masculino</option>
             <option value="fem">Femenino</option>
             <option value="otro">Otro</option>
         </select> <br> <br> 
-        <p>Fecha de nacimiento</p>
-        <input type="date" name="fechaNacimiento" id="inputNacimiento"> <br> <br> 
-
-        <p>Ingrese la nacionalidad</p>
-        <select name="nacionalidad" id="selectNacionalidad"></select> <br> <br> 
-
         <!--Dirección-->
         <input type="text" placeholder="Calle" name="calle"> <br> <br>
         <input type="text" placeholder="Numero" name="numero"> <br> <br>
         <input type="text" placeholder="Departamento" name="departamento"> <br> <br>
         <input type="text" placeholder="Código postal" name="codigo_postal"> <br> <br>
+
+        <input type="password", placeholder="Contraseña" name="contrasena"> <br> <br>
+        <input type="password", placeholder="Repetir Contraseña"> <br> <br> 
 
         <select name="comuna" id="selectComuna"></select> <br> <br>
         <button type="button" onclick="validarFormulario()"> Enviar</button>
