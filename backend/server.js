@@ -54,12 +54,16 @@ const direccion = new mongoose.Schema({
 //Modelo usuario
 const usuario = new mongoose.Schema({
     nombre: String,
+    rut: String,
     correo: String,
-    contrasena: String,
-    genero: String,
+    telefono: String,
     fechaNacimiento: String,
     nacionalidad: String,
-    direccion:[direccion]
+    genero: String,
+    direccion:[direccion],
+    contrasena: String,
+    fechaRegistro: String,
+    activo: String
 })
 
 const Usuario = mongoose.model("Usuario", usuario, "usuarios")
@@ -115,12 +119,17 @@ aplicacion.post("/guardarUsuario", async(request, response) => {
         
         const{
             nombre,
+            rut,
             correo,
-            contrasena,
-            genero,
+            telefono,
             fechaNacimiento,
             nacionalidad,
-            direccion
+            genero,
+            direccion,
+            contrasena,
+            fechaRegistro,
+            activo
+
         } = request.body;
         const salt = bcrypt.genSaltSync(10);
         const contrasenaHash =bcrypt.hashSync(contrasena, salt);
@@ -128,12 +137,16 @@ aplicacion.post("/guardarUsuario", async(request, response) => {
 
         const nuevoUsuario = new Usuario({
             nombre,
+            rut,
             correo,
-            contrasena: contrasenaHash,
-            genero,
+            telefono,
             fechaNacimiento,
             nacionalidad,
-            direccion: objetoDireccion
+            genero,
+            direccion: objetoDireccion,
+            contrasena: contrasenaHash, 
+            fechaRegistro,
+            activo
         });
 
         await nuevoUsuario.save()

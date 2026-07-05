@@ -63,6 +63,8 @@ function validarFormulario(){
         dataForm.set("direccion", JSON.stringify(direccion));
 
         const datos = Object.fromEntries(dataForm.entries());
+        datos.fechaRegistro = new Date().toISOString();
+        datos.activo = "true";
 
         const enviarFormulario = async () => {
             try{
