@@ -7,16 +7,25 @@
 </head>
 <body>
     <h1>Registro de usuarios</h1>
+
+    <div id="errorFormulario" style="display:none; color:red;">
+        <p>Revise los siguientes errores:</p>
+        <ul id="listaErrores"></ul>
+    </div>
+
+
     <form id="formularioRegistro">
 
-        <input type="text" placeholder="Nombre completo" name="nombre"> <br> <br>
-        <input type="text" placeholder="Rut (sin puntos ni guión)" name="rut">  <br> <br>
-        <input type="email", placeholder="Correo" name="correo"> <br> <br>
-        <input type="text" placeholder="Teléfono" name="telefono">  <br> <br>
+        <input type="text"placeholder="Nombre completo" name="nombre" id="inputNombre"> <br> <br>
+        <input type="text" placeholder="Rut (sin puntos ni guión)" name="rut" id="inputRut">  <br> <br>
+        <input type="email", placeholder="Correo" name="correo" id="inputCorreo"> <br> <br>
+        <input type="text" placeholder="Teléfono" name="telefono" id="inputTelefono">  <br> <br>
         <p>Fecha de nacimiento</p>
         <input type="date" name="fechaNacimiento" id="inputNacimiento"> <br> <br>
         <p>Ingrese la nacionalidad</p>
-        <select name="nacionalidad" id="selectNacionalidad"></select> <br> <br> 
+        <select name="nacionalidad" id="selectNacionalidad">
+            <option value="">Seleccione nacionalidad</option>
+        </select> <br> <br> 
         
         <select name="genero" id="selectGenero">
             <option value="">Seleccione género</option>
@@ -25,15 +34,17 @@
             <option value="otro">Otro</option>
         </select> <br> <br> 
         <!--Dirección-->
-        <input type="text" placeholder="Calle" name="calle"> <br> <br>
-        <input type="text" placeholder="Numero" name="numero"> <br> <br>
-        <input type="text" placeholder="Departamento" name="departamento"> <br> <br>
-        <input type="text" placeholder="Código postal" name="codigo_postal"> <br> <br>
+        <input type="text" placeholder="Calle" name="calle" id="inputCalle"> <br> <br>
+        <input type="text" placeholder="Numero" name="numero" id="inputNumeroCalle"> <br> <br>
+        <input type="text" placeholder="Departamento (opcional)" name="departamento" id="inputDepartamento"> <br> <br>
+        <input type="text" placeholder="Código postal (opcional)" name="codigo_postal" id ="inputCodigoPostal"> <br> <br>
 
-        <input type="password", placeholder="Contraseña" name="contrasena"> <br> <br>
-        <input type="password", placeholder="Repetir Contraseña"> <br> <br> 
+        <input type="password", placeholder="Contraseña" name="contrasena" id="inputContrasena"> <br> <br>
+        <input type="password", placeholder="Repetir Contraseña" id="inputRepetirContrasena" name="repetirContrasena"> <br> <br> 
 
-        <select name="comuna" id="selectComuna"></select> <br> <br>
+        <select name="comuna" id="selectComuna">
+            <option value="">Seleccione su comuna</option>
+        </select> <br> <br>
         <button type="button" onclick="validarFormulario()"> Enviar</button>
     </form>
 
