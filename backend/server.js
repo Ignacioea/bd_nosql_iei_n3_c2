@@ -62,14 +62,15 @@ const usuario = new mongoose.Schema({
     genero: String,
     direccion:[direccion],
     contrasena: String,
-    fechaRegistro: String,
-    activo: String
+    fechaRegistro: Date,
+    activo: Boolean
 })
 
 const Usuario = mongoose.model("Usuario", usuario, "usuarios")
 //MÉTODOS
 
 aplicacion.get("/obtenerPaises", async(request, response) => {
+    console.log(request.body);
     try{
         const paises = await Pais.find();
         response.json(paises)
@@ -145,8 +146,8 @@ aplicacion.post("/guardarUsuario", async(request, response) => {
             genero,
             direccion: objetoDireccion,
             contrasena: contrasenaHash, 
-            fechaRegistro,
-            activo
+            fechaRegistro: new Date(),
+            activo: true
         });
 
         await nuevoUsuario.save()
