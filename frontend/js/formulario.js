@@ -26,8 +26,7 @@ function validarFormulario(){
         agregarError("<li>Debe ingresar su número de teléfono.</li>");
         formularioValido = false;
     }
-    if (!ValidarInput($("#inputNacimiento"))){
-        agregarError("<li>Debe ingresar su fecha de nacimiento.</li>");
+    if (!validarFechaNacimiento($("#inputNacimiento"))){
         formularioValido = false;
     }
     if (!ValidarInput($("#selectNacionalidad"))){
@@ -58,7 +57,7 @@ function validarFormulario(){
         agregarError("<li>Debe seleccionar su comuna.</li>");
         formularioValido = false;
     }
-    console.log("RESULTADO FINAL:", formularioValido);
+
     if (formularioValido){
         alert("formulario válido, enviando datos...");
 
@@ -89,7 +88,6 @@ function validarFormulario(){
                     body: JSON.stringify(datos)
                 });
                 const data = await respuesta.json();
-                console.log(data);
 
                 if(respuesta.ok){
                     window.location.href = "./listado.html";
@@ -180,9 +178,32 @@ function validarCorreo(elemento) {
             return false
         }
     } else {
-
+        return false;
     }
 };
+
+function validarFechaNacimiento(elemento){
+    if(!ValidarInput(elemento)){
+        return false;
+    }
+    const campo = $(elemento);
+    const fechaNacimiento = new Date($(elemento).val());
+    const fechaActual = new Date();
+    
+    fechaActual.setHours(0,0,0,0);
+    if(fechaNacimiento < fechaActual){
+        campo.removeClass("is-invalid");
+        campo.addClass("is-valid");
+        return true;
+    }else{
+        agregarError("<li>La fecha de nacimiento debe ser anterior a la fecha actual.</li>");
+        campo.addClass("is-invalid");
+        campo.removeClass("is-valid");
+        return false;
+    }
+
+}
+
 
 function validarContrasena(elemento) {
     if (!ValidarInput(elemento)) {

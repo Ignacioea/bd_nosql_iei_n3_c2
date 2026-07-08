@@ -9,16 +9,23 @@
 <body>
     <nav class="navbar">
 
-    <h2 class="logo">Gestión de Eventos</h2>
+        <h2 class="logo">Gestión de Eventos</h2>
 
-    <ul class="menu">
-        <li><a href="formulario.html">Registro</a></li>
-        <li><a href="listado.html">Usuarios</a></li>
-        <li><a href="evento.html">Crear Evento</a></li>
-        <li><a href="listadoevento.html">Eventos</a></li>
-    </ul>
+        <ul class="menu">
+            <li><a href="formulario.html">Registro</a></li>
+            <li><a href="listado.html">Usuarios</a></li>
+            <li><a href="evento.html">Crear Evento</a></li>
+            <li><a href="listadoevento.html">Eventos</a></li>
+        </ul>
 
     </nav>
+
+    <div id="errorFormulario" style="display:none; color:red;">
+        <p>Revise los siguientes errores:</p>
+        <ul id="listaErrores"></ul>
+    </div>
+
+
     <h1>Crear Evento</h1>
 
     <form id="formularioEvento">
@@ -48,7 +55,7 @@
             <option value="sus">Suspendido</option>
             <option value="fin">Finalizado</option>
         </select> <br> <br>
-        <button type="button" onclick="guardarEvento()"> Crear </button>
+        <button type="button" onclick="validarEvento()"> Crear </button>
     </form>
 
     <script src="js/jquery.js"></script>
