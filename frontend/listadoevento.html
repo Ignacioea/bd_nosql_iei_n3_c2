@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de usuarios</title>
+    <title>Listado de eventos</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,31 +15,38 @@
         <li><a href="formulario.html">Registro</a></li>
         <li><a href="listado.html">Usuarios</a></li>
         <li><a href="evento.html">Crear Evento</a></li>
-        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="listadoevento.html">Eventos</a></li>
     </ul>
 
     </nav>
     <div class="container">
-        <h1>Usuarios</h1>
-        <table id="tablaUsuarios">
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Género</th>
-                    <th scope="col">Fecha Nacimiento</th>
-                    <th scope="col">Nacionalidad</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    
-    <script src="js/jquery.js"></script>
 
+        <h1>Eventos</h1>
+
+        <table id="tablaEventos">
+
+            <thead>
+
+                <tr>
+                    <th>Usuario</th>
+                    <th>Evento</th>
+                    <th>Categoría</th>
+                    <th>Lugar</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Costo</th>
+                    <th>Estado</th>
+                </tr>
+
+            </thead>
+
+        </table>
+
+    </div>
+    <script src="js/jquery.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-
-    <script src="js/listado.js"></script>
+    <script src="js/listadoevento.js"></script>
 
 </body>
 </html>

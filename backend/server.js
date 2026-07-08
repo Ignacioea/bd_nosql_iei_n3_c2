@@ -65,8 +65,26 @@ const usuario = new mongoose.Schema({
     fechaRegistro: Date,
     activo: Boolean
 })
-
 const Usuario = mongoose.model("Usuario", usuario, "usuarios")
+
+//Modelo Evento
+const evento = new mongoose.Schema({
+    usuario:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Usuario"
+    },
+    nombre: String,
+    categoria: String,
+    lugar: String,
+    fecha: String,
+    hora: String,
+    costo: Number,
+    organizador: String,
+    descripcion: String,
+    estado: String
+});
+
+const Evento = mongoose.model("Evento", evento, "eventos")
 //MÉTODOS
 
 aplicacion.get("/obtenerPaises", async(request, response) => {
@@ -164,4 +182,65 @@ aplicacion.post("/guardarUsuario", async(request, response) => {
         error: exception.message
     });
 }
+});
+
+aplicacion.post("/guardarEvento", async(request, response)=>{
+    try{
+        const{
+            usuario,
+            nombre,
+            categoria,
+            lugar,
+            fecha,
+            hora,
+            costo,
+            organizador,
+            descripcion,
+            estado
+        } = request.body;
+        const nuevoEvento = new Evento({
+            usuario,
+            nombre,
+            categoria,
+            lugar,
+            fecha,
+            hora,
+            costo,
+            organizador,
+            descripcion,
+            estado
+        });
+
+        await nuevoEvento.save();
+
+        response.status(200).json({
+            message: "Evento creado correctamente"
+        })
+    }catch(error){
+        response.status(500).json({
+            message: "no fue posible guardar el evento: ", error
+        });
+    }
+});
+
+aplicacion.get("/obtenerEventos", async(request, response)=>{
+    try{
+        const eventos = await Evento.aggregate([
+            {
+                $lookup:{
+                    from:"usuarios",
+                    localField:"usuario",
+                    foreignField: "_id",
+                    as:"usuario"
+                }
+            }
+        ]);
+        response.json(eventos);
+
+    }catch(error){
+        response.status(500).json({
+            message: "no fue posible obtener los eventos: ", error
+        });
+
+    }
 });

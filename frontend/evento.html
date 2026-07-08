@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de eventos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+
+    <h2 class="logo">Gestión de Eventos</h2>
+
+    <ul class="menu">
+        <li><a href="formulario.html">Registro</a></li>
+        <li><a href="listado.html">Usuarios</a></li>
+        <li><a href="evento.html">Crear Evento</a></li>
+        <li><a href="listadoevento.html">Eventos</a></li>
+    </ul>
+
+    </nav>
+    <h1>Crear Evento</h1>
+
+    <form id="formularioEvento">
+        <select name="usuario" id="selectUsuario">
+            <option value="">Seleccione un usuario</option>
+        </select> <br> <br>
+        
+    
+        <input type="text" placeholder="ingrese el nombre del evento" id="inputNombre" name="nombre"> <br> <br>
+        <select name="categoria" id="selectCategoria">
+            <option value="">seleccione la categoría</option>
+            <option value="dep">Deportivo</option>
+            <option value="mus">Musical</option>
+            <option value="cul">Cultural</option>
+            <option value="tec">Tecnología</option>
+            <option value="edu">Educación</option>
+        </select> <br> <br>
+        <input type="text" placeholder="lugar" id="inputLugar" name="lugar"> <br> <br>
+        <input type="date" name="fecha" id="inputfecha"> <br> <br>
+        <input type="text" placeholder="Hora" id="inputHora" name="hora"> <br> <br>
+        <input type="text" placeholder="Costo" id="inputCosto" name="costo"> <br> <br>
+        <input type="text" placeholder="organizador" id="inputOrganizador" name="organizador"> <br> <br>
+        <input type="text" placeholder="Descripción del evento" id="inputDescripcion" name="descripcion"> <br> <br>
+        <select name="estado" id="selectEstado">
+            <option value="">Seleccione un estado</option>
+            <option value="act">Activo</option>
+            <option value="sus">Suspendido</option>
+            <option value="fin">Finalizado</option>
+        </select> <br> <br>
+        <button type="button" onclick="guardarEvento()"> Crear </button>
+    </form>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/evento.js"></script>
+</body>
+</html>
